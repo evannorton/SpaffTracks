@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import HelloWorld from './components/hello.jsx';
-import GoodbyeWorld from './components/goodbye.jsx';
+import HelloWorld from './components/hello';
+import GoodbyeWorld from './components/goodbye';
 
 const Navigation = () => (
         <Router>
