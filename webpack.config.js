@@ -1,12 +1,11 @@
 const path = require('path');
 
-const CLIENT_PATH = path.join(__dirname, './client/dist');
-const SERVER_PATH = path.join(__dirname, './server/lib');
+const CLIENT_DEST = path.join(__dirname, './client/dist');
 
 module.exports = [
     {
         entry: './client/src/index.js',
-        output: { path: CLIENT_PATH, filename: 'bundle.js' },
+        output: { path: CLIENT_DEST, filename: 'bundle.js' },
         module: {
             loaders: [
                 {
