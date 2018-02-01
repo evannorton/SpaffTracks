@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import HelloWorld from './components/hello';
-import GoodbyeWorld from './components/goodbye';
+import HelloWorld from './hello';
+import GoodbyeWorld from './goodbye';
 
 class Navigation extends Component {
     render() {
