@@ -51,7 +51,7 @@ function empty(procedureName, args = []) {
     });
 }
 
-function generatePlaceholders(args) {
+function generatePlaceholders(args = []) {
     let placeholders = '';
     if (args.length > 0) {
         for (let i = 0; i < args.length; i++) {
