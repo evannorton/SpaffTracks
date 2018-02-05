@@ -77,4 +77,4 @@ function getConnection() {
     });
 }
 
-export { row, rows, empty, executeQuery };
+export { row, rows, empty, executeQuery, generatePlaceholders };
