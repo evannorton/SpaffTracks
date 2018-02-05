@@ -6,7 +6,6 @@
   "scripts": {
     "build:client": "webpack",
     "build:server": "babel ./server/src -d ./server/lib",
-    "build:server:watch": "babel ./server/src -w -d ./server/lib",
     "dev": "concurrently -k \"npm run watch:client\" \"npm run watch:server\" \"nodemon --watch server/lib --delay 1\"",
     "start": "npm run build:client && npm run build:server && npm run start:server",
     "start:server": "node server/lib/index.js",
