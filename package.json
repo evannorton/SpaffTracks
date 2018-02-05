@@ -7,11 +7,11 @@
     "build:client": "webpack",
     "build:server": "babel ./server/src -d ./server/lib",
     "build:server:watch": "babel ./server/src -w -d ./server/lib",
-    "dev": "concurrently \"npm run watch:client\" \"npm run watch:server\"",
+    "dev": "concurrently \"npm run watch:client\" \"npm run watch:server\" \"nodemon --watch server/lib --delay 1\"",
     "start": "npm run build:client && npm run build:server && npm run start:server",
     "start:server": "node server/lib/index.js",
     "watch:client": "webpack --watch",
-    "watch:server": "concurrently \"npm run build:server:watch\" \"nodemon --watch server/lib --delay 1\""
+    "watch:server": "babel ./server/src -w -d ./server/lib"
   },
   "author": "Covalence",
   "license": "ISC",
@@ -21,14 +21,16 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "crypto": "^1.0.1",
     "express": "^4.16.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
+    "uuid": "^3.2.1",
     "webpack": "^3.10.0"
   },
   "devDependencies": {
     "concurrently": "^3.5.1",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.12"
   }
 }
