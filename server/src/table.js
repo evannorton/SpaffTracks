@@ -20,12 +20,12 @@ class Table {
     }
 
     find(query) {
-        let columns = Object.keys(row);
-        let values = Object.values(row);
+        let columns = Object.keys(query);
+        let values = Object.values(query);
         let conditions = columns.map((columnName) => {
             return `${columnName} LIKE ?`;
         });
-        let sql = `SELECT * FROM ${this.tableName} WHERE ${conditions.join(',')};`;
+        let sql = `SELECT * FROM ${this.tableName} WHERE ${conditions.join(' AND ')};`;
         return executeQuery(sql, values);
     }
 
