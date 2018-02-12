@@ -19,9 +19,9 @@ class Login extends Component {
         userService.checkLogin()
         .then((loggedIn) => {
             if (loggedIn) {
-                // this.setState({ redirectToReferrer: true, checkingLogin: false });
+                this.setState({ redirectToReferrer: true, checkingLogin: false });
             } else {
-                // this.setState({ checkingLogin: false });
+                this.setState({ checkingLogin: false });
             }
         });
     }
