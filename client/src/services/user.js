@@ -47,6 +47,7 @@ function login(email, password) {
 
 function logout() {
     baseService.clearAuthToken();
+    loggedIn = false;
 }
 
 function me() {
