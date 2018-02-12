@@ -16,9 +16,6 @@ function configurePassport(app) {
         usersTable.find({ email })
         .then((results) => results[0])
         .then((user) => {
-            console.log(user);
-            console.log(user.password);
-            console.log(password);
             if (user && user.password && user.password === password) {
                 tokensTable.insert({
                     userid: user.id
