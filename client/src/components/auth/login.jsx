@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import * as userService from '../../services/user';
 import { Redirect } from 'react-router-dom';
+import IndeterminateProgress from '../utilities/indeterminateProgress';
 
 class Login extends Component {
     constructor(props) {
@@ -18,9 +19,9 @@ class Login extends Component {
         userService.checkLogin()
         .then((loggedIn) => {
             if (loggedIn) {
-                this.setState({ redirectToReferrer: true, checkingLogin: false });
+                // this.setState({ redirectToReferrer: true, checkingLogin: false });
             } else {
-                this.setState({ checkingLogin: false });
+                // this.setState({ checkingLogin: false });
             }
         });
     }
@@ -50,16 +51,7 @@ class Login extends Component {
        const { redirectToReferrer, checkingLogin } = this.state;
 
        if (checkingLogin) {
-           return (
-               <div className="card mx-auto" style={{ width: '400px' }}>
-                    <div className="card-body">
-                        <p className="card-text text-center">Checking your login information...</p>
-                        <div className="progress">
-                            <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style={{ width: '100%' }}></div>
-                        </div>
-                    </div>
-               </div>
-           );
+           return <IndeterminateProgress message="Checking Login Status..." />;
        }
        if (redirectToReferrer) {
            return (
