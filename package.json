@@ -21,7 +21,6 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "crypto": "^1.0.1",
     "express": "^4.16.2",
     "isomorphic-fetch": "^2.2.1",
     "mysql": "^2.15.0",
