@@ -47,10 +47,11 @@ function login(email, password) {
 
 function logout() {
     baseService.clearAuthToken();
+    loggedIn = false;
 }
 
 function me() {
     return baseService.get('/api/users/me');
 }
 
-export { isLoggedIn, checkLogin, login };
+export { isLoggedIn, checkLogin, login, logout };
