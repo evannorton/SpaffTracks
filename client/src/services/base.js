@@ -47,7 +47,7 @@ function json(url, method = 'GET', payload = {}) {
     return makeFetch(url, data)
         .then((response) => {
             if (response.ok) {
-                let contentType = response.get('Content-Type');
+                let contentType = response.headers.get('Content-Type');
 
                 if (contentType.indexOf('application/json') > -1) {
                     return response.json();
