@@ -39,17 +39,25 @@ function json(url, method = 'GET', payload = {}) {
             'Authorization': authToken
         })
     };
+
     if (method === 'GET') {
         delete data.body;
     }
+
     return makeFetch(url, data)
-    .then((response) => {
-        if (response.ok) {
-            return response.json();
-        } else {
+        .then((response) => {
+            if (response.ok) {
+                let contentType = response.headers.get('Content-Type');
+
+                if (contentType.indexOf('application/json') > -1) {
+                    return response.json();
+                }
+
+                return response.statusText;
+            }
+
             throw response;
-        }
-    });
+        });
 }
 
 function get(url) {
