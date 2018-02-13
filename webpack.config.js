@@ -6,13 +6,15 @@ module.exports = {
     entry: './client/src/index.js',
     output: { path: CLIENT_DEST, filename: 'bundle.js' },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /.jsx?$/,
-                loader: 'babel-loader',
                 exclude: /node_modules/,
-                query: {
-                    presets: ['env', 'react']
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env', 'react']
+                    }
                 }
             }
         ]
