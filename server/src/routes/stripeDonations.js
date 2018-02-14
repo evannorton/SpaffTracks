@@ -1,16 +1,16 @@
 import { Router } from 'express';
-import stripe from '../utils/stripeCharge'
+import { charge } from '../utils/stripeCharge'
 
 let router = Router();
 
-router.post('/donate', (req, res) => {
-    let amount = Number(req.body.amount);
-    stripe.charge(req.body.token, amount)
+router.post('/', (req, res) => {
+    let tokenId = req.body.token.id;
+    let amount = req.body.token.amount;
+    charge(tokenId, amount)
         .then((success) => {
-            res.sendStatus(204);
+            res.status(200).json({ message: 'success'});
         })
         .catch((err) => {
-            console.log(err);
             res.sendStatus(500);
         });
 });

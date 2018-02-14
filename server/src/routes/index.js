@@ -9,6 +9,7 @@ import { isLoggedIn, tokenMiddleware } from '../middleware/auth.mw';
 let router = Router();
 
 router.use('/auth', authRouter);
+router.use('/donate', stripeDonationsRouter);
 
 router.route('*')
     .post(tokenMiddleware, isLoggedIn)
@@ -18,6 +19,5 @@ router.route('*')
 router.use('/classes', classesRouter);
 router.use('/people', peopleRouter);
 router.use('/users', usersRouter);
-router.use('/donate', stripeDonationsRouter);
 
 export default router;
