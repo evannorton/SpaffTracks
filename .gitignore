@@ -1,5 +1,4 @@
 node_modules
 client/dist
 server/lib
-**/*/ENV_VAR
-ENV_VAR
+server/src/config/config.js

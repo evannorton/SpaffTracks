@@ -1,6 +1,4 @@
-import { Router } from 'express';
-import peopleRouter from './people';
-import classesRouter from './classes';
+import { Router } from 'express';;
 import authRouter from './auth';
 import usersRouter from './users';
 import stripeDonationsRouter from './stripeDonations';
@@ -16,8 +14,6 @@ router.route('*')
     .put(tokenMiddleware, isLoggedIn)
     .delete(tokenMiddleware, isLoggedIn);
 
-router.use('/classes', classesRouter);
-router.use('/people', peopleRouter);
 router.use('/users', usersRouter);
 
 export default router;
