@@ -4,4 +4,20 @@ body {
 
 header {
     margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+#logo {
+    max-width: 800px;
+    width: 100%
+}
+
+#audio-player {
+    padding: 1em 10%;
+    background-color: black;
+}
+
+#play-button {
+    color: red;
+    font-size: 5em;
 }
