@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react';
 
-class App extends Component {
+import Header from './header';
+
+export default class App extends Component {
 
     render() {
         return (
             <Fragment>
-                <img id="logo" width="25%" src="/images/SpaffTracks.png" alt="SpaffTracks" />
+                <Header />
             </Fragment>
         )
     }
 }
-
-export default App;
