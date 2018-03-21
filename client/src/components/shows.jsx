@@ -14,15 +14,16 @@ export default class Shows extends Component {
     }
 
     componentDidMount() {
-        get('/shows')
+        get("/shows/year/" + this.props.match.params.year)
             .then((shows) => {
+                console.log(shows);
                 this.setState({ shows });
             });
     }
 
     render() {
         return (
-            <div id="shows" className="bubble bubble-fluid container-fluid d-flex align-items-start justify-content-center">
+            <div id="shows" className="bubble container-fluid d-flex align-items-start justify-content-center">
                 <div className="row">
                     {
                         this.state.shows.map((show) => {
