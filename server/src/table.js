@@ -8,6 +8,10 @@ class Table {
         this.tableName = tableName;
     }
 
+    getYears() {
+        return executeQuery('CALL getYears');
+    }
+
     getShows() {
         return executeQuery('SELECT * FROM shows');
     }
@@ -16,9 +20,14 @@ class Table {
         return executeQuery(`CALL getShowsByYear(${year})`);
     }
 
-    getYears() {
-        return executeQuery('CALL getYears');
+    getTracks() {
+        return executeQuery('SELECT * FROM tracks');
     }
+
+    getTracksByShow(date) {
+        return executeQuery(`CALL getTracksByShow('${date}')`);
+    }
+
 }
 
 export default Table;
