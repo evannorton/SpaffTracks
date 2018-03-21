@@ -8,7 +8,7 @@ export default class AudioPlayer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentTrack: 'http://phish.in/audio/000/017/963/17963.mp3',
+            currentTrack: 'https://archive.org/download/Spafford2012-08-24/01.AintThatWrong.flac',
             icon: faPlayCircle
         }
         this.audio;
@@ -33,7 +33,7 @@ export default class AudioPlayer extends Component {
             <div id="audio-player" className="container-fluid">
                 <audio
                     src={this.state.currentTrack}
-                    type="audio/mp3"
+                    type="audio/ogg"
                 />
                 <FontAwesomeIcon id="play-button"
                     icon={this.state.icon}

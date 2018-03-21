@@ -2,13 +2,13 @@ import { Router } from 'express';
 import Table from '../table';
 
 let router = Router();
-let years = new Table("years");
+let shows = new Table("shows");
 
 router.get('/', (req, res) => {
 
-    years.getYears()
-        .then((years) => {
-            res.send(years[0]);
+    shows.getAll()
+        .then((shows) => {
+            res.send(shows);
         }).catch((err) => {
             console.log(err);
         });

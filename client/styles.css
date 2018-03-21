@@ -1,3 +1,5 @@
+/* General */
+
 body {
     background-color: red;
 }
@@ -11,9 +13,56 @@ body {
     display: flex;
 }
 
+/* Main */
+
+.bubble {
+    height: 650px;
+    padding: 0;
+    width: 90%;
+    margin-top: 150px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    font-size: 3.3em;
+    border: 4px solid black;
+}
+
+.bubble-fluid {
+    height: fit-content;
+    min-height: 650px;
+    width: 90%;
+    margin: 150px inherit;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    font-size: 3.3em;
+    border: 4px solid black;
+    padding: 37px 0;
+}
+
+.bubble-tile {
+    border-bottom: 2px solid black;
+    cursor: pointer;
+    user-select: none;
+    color: white;
+}
+
+.bubble-tile:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    color: white;
+    text-decoration: none;
+}
+
+.bubble .row {
+    border-top: 2px solid black;
+}
+
+/* Header */
+
 header {
-    margin-top: 2em;
-    margin-bottom: 2em;
+    position: fixed;
+    top: 0;
+    padding: 1em 0;
+    background-color: black;
+    z-index: 100;
 }
 
 #logo-link {
@@ -25,32 +74,7 @@ header {
     width: 100%;
 }
 
-#years {
-    height: 650px;
-    padding: 0;
-    width: 90%;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50px;
-    color: white;
-    font-size: 3.3em;
-    border: 4px solid black;
-}
-
-#years .row {
-    border-top: 2px solid black;
-}
-
-#year {
-    border-bottom: 2px solid black;
-    cursor: pointer;
-    user-select: none;
-    color: inherit;
-}
-
-#year:hover {
-    background-color: rgba(0, 0, 0, 0.25);
-    text-decoration: none;
-}
+/* Audio Player */
 
 #audio-player {
     position: fixed;

@@ -2,32 +2,30 @@ import React, { Component } from 'react';
 
 import { get } from '../services/base';
 
-import Year from './year';
-
-export default class Years extends Component {
+export default class Tracks extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            years: []
+            tracks: []
         }
     }
 
     componentDidMount() {
-        get('/years')
-            .then((years) => {
-                this.setState({ years });
+        get('/tracks')
+            .then((tracks) => {
+                this.setState({ tracks });
             });
     }
 
     render() {
         return (
-            <div id="years" className="bubble container-fluid d-flex align-items-center justify-content-center">
+            <div id="tracks" className="bubble container-fluid d-flex align-items-center justify-content-center">
                 <div className="row">
                     {
-                        this.state.years.map((year) => {
+                        this.state.tracks.map((show) => {
                             return (
-                                <Year key={year.year} year={year.year} />
+                                <Show key={show.id} show={show} />
                             );
                         })
                     }
@@ -35,5 +33,4 @@ export default class Years extends Component {
             </div>
         );
     }
-
 }

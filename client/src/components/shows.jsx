@@ -2,32 +2,32 @@ import React, { Component } from 'react';
 
 import { get } from '../services/base';
 
-import Year from './year';
+import Show from './show';
 
-export default class Years extends Component {
+export default class Shows extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            years: []
+            shows: []
         }
     }
 
     componentDidMount() {
-        get('/years')
-            .then((years) => {
-                this.setState({ years });
+        get('/shows')
+            .then((shows) => {
+                this.setState({ shows });
             });
     }
 
     render() {
         return (
-            <div id="years" className="bubble container-fluid d-flex align-items-center justify-content-center">
+            <div id="shows" className="bubble bubble-fluid container-fluid d-flex align-items-start justify-content-center">
                 <div className="row">
                     {
-                        this.state.years.map((year) => {
+                        this.state.shows.map((show) => {
                             return (
-                                <Year key={year.year} year={year.year} />
+                                <Show key={show.id} show={show} />
                             );
                         })
                     }
@@ -35,5 +35,4 @@ export default class Years extends Component {
             </div>
         );
     }
-
 }

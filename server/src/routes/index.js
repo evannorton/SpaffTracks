@@ -1,10 +1,11 @@
-import { Router } from 'express';;
+import { Router } from 'express';
 import { isLoggedIn, tokenMiddleware } from '../middleware/auth.mw';
 
 import authRouter from './auth';
 import donationsRouter from './donations';
 import usersRouter from './users';
 import yearsRouter from './years';
+import showsRouter from './shows';
 
 let router = Router();
 
@@ -18,5 +19,6 @@ router.route('*')
 
 router.use('/users', usersRouter);
 router.use('/years', yearsRouter);
+router.use('/shows', showsRouter);
 
 export default router;
