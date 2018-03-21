@@ -7,9 +7,9 @@ let years = new Table("years");
 
 router.get('/', (req, res) => {
 
-    years.getAll()
+    years.getYears()
         .then((years) => {
-            res.send(years);
+            res.send(years[0]);
         }).catch((err) => {
             console.log(err);
         });

@@ -2,6 +2,14 @@ body {
     background-color: red;
 }
 
+.row {
+    width: 100%;
+}
+
+.no-style-link {
+    display: flex;
+}
+
 header {
     margin-top: 2em;
     margin-bottom: 2em;
@@ -9,13 +17,40 @@ header {
 
 #logo {
     max-width: 750px;
-    width: 100%
+    width: 90%
+}
+
+#years {
+    height: 650px;
+    padding: 0;
+    width: 90%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    color: white;
+    font-size: 3.3em;
+    border: 4px solid black;
+}
+
+#years .row {
+    border-top: 2px solid black;
+}
+
+#year {
+    border-bottom: 2px solid black;
+    cursor: pointer;
+    user-select: none;
+    color: inherit;
+}
+
+#year:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    text-decoration: none;
 }
 
 #audio-player {
     position: fixed;
     bottom: 0;
-    padding: 1em;
+    padding: 1em 5%;
     background-color: black;
 }
 

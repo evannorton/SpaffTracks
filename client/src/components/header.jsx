@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
     render() {
@@ -6,10 +7,12 @@ export default class Header extends Component {
             <header className="container-fluid">
                 <div className="row">
                     <div className="col-12 d-flex align-items-center justify-content-center">
-                        <img id="logo" src="/images/SpaffTracks.png" alt="SpaffTracks" />
+                        <Link to="/">
+                            <img id="logo" src="/images/SpaffTracks.png" alt="SpaffTracks" />
+                        </Link>
                     </div>
                 </div>
-            </header>
+            </header >
         );
     }
 }

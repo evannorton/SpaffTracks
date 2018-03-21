@@ -11,7 +11,7 @@ class Table {
     getOne(id) {
         let sql = `SELECT * FROM ${this.tableName} WHERE id = ${id};`;
         return executeQuery(sql, [id])
-        .then((results) => results[0]);
+            .then((results) => results[0]);
     }
 
     getAll() {
@@ -35,7 +35,7 @@ class Table {
         let placeholderString = generatePlaceholders(values);
         let sql = `INSERT INTO ${this.tableName} (${columns.join(',')}) VALUES (${placeholderString});`;
         return executeQuery(sql, values)
-        .then((results) => ({id: results.insertId }));
+            .then((results) => ({ id: results.insertId }));
     }
 
     update(id, row) {
@@ -51,6 +51,10 @@ class Table {
     delete(id) {
         let sql = `DELETE FROM ${this.tableName} WHERE id = ${id}`;
         return executeQuery(sql);
+    }
+
+    getYears() {
+        return executeQuery('call getYears');
     }
 }
 
