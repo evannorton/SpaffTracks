@@ -7,7 +7,7 @@ export default class Header extends Component {
             <header className="container-fluid">
                 <div className="row">
                     <div className="col-12 d-flex align-items-center justify-content-center">
-                        <Link to="/">
+                        <Link to="/" id="logo-link">
                             <img id="logo" src="/images/SpaffTracks.png" alt="SpaffTracks" />
                         </Link>
                     </div>

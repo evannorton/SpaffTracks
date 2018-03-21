@@ -4,6 +4,7 @@ body {
 
 .row {
     width: 100%;
+    margin: 0;
 }
 
 .no-style-link {
@@ -15,9 +16,13 @@ header {
     margin-bottom: 2em;
 }
 
-#logo {
+#logo-link {
     max-width: 750px;
     width: 90%
+}
+
+#logo {
+    width: 100%;
 }
 
 #years {
