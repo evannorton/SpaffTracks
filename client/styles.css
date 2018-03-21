@@ -8,16 +8,19 @@ header {
 }
 
 #logo {
-    max-width: 800px;
+    max-width: 750px;
     width: 100%
 }
 
 #audio-player {
-    padding: 1em 10%;
+    position: fixed;
+    bottom: 0;
+    padding: 1em;
     background-color: black;
 }
 
 #play-button {
     color: red;
     font-size: 5em;
+    cursor: pointer;
 }

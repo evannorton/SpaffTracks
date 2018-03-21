@@ -1,13 +1,15 @@
 import { Router } from 'express';;
-import authRouter from './auth';
-import usersRouter from './users';
-import stripeDonationsRouter from './stripeDonations';
 import { isLoggedIn, tokenMiddleware } from '../middleware/auth.mw';
+
+import authRouter from './auth';
+import donationsRouter from './donations';
+import usersRouter from './users';
+import yearsRouter from './years';
 
 let router = Router();
 
 router.use('/auth', authRouter);
-router.use('/donate', stripeDonationsRouter);
+router.use('/donate', donationsRouter);
 
 router.route('*')
     .post(tokenMiddleware, isLoggedIn)
@@ -15,5 +17,6 @@ router.route('*')
     .delete(tokenMiddleware, isLoggedIn);
 
 router.use('/users', usersRouter);
+router.use('/years', yearsRouter);
 
 export default router;

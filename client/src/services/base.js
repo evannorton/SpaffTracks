@@ -1,5 +1,6 @@
 import 'isomorphic-fetch';
 
+const baseurl = 'http://localhost:3000/api';
 const AUTH_TOKEN_KEY = 'authtoken';
 let authToken = '';
 
@@ -27,7 +28,7 @@ function populateAuthToken() {
 }
 
 function makeFetch(url, info) {
-    return fetch(url, info);
+    return fetch(baseurl + url, info);
 }
 
 function json(url, method = 'GET', payload = {}) {
