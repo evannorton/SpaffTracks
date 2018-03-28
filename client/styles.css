@@ -101,6 +101,10 @@ header {
     background-color: black;
 }
 
+#buttons {
+    margin-right: 0.5%;
+}
+
 .play-button {
     margin: 0 .25em;
     color: red;
@@ -114,14 +118,46 @@ header {
     cursor: pointer;
 }
 
+#track-info {
+    position: absolute;
+    left: 230px;
+}
+
 #current-track-title {
     font-size: 2em;
     color: white;
     margin: 0 .5em;
+    position: relative;
+    bottom: 10px;
 }
 
 #current-track-date {
     font-size: 1.5em;
     color: white;
     margin: 0 .5em;
+    position: relative;
+    bottom: 10px;
+}
+
+#audio-line {
+    background-color: red;
+    height: 5px;
+    width: 100%;
+    position: relative;
+    top: 20px;
+}
+
+#tracker {
+    display: block;
+    background-color: white;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: 136px;
+    left: 5%;
+    bottom: 8px;
+    position: fixed;
+
 }

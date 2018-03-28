@@ -19,13 +19,17 @@ export default class AudioPlayer extends Component {
                 venue: "",
                 city: ""
             },
-            icon: faPlayCircle
+            icon: faPlayCircle,
+            trackerPosition: 0
         }
         this.audio;
+        this.tracker;
     }
 
     componentDidMount() {
         this.audio = $("audio")[0];
+        this.audio.ontimeupdate = () => { this.moveTracker() };
+        this.tracker = $("#tracker");
     }
 
     componentWillReceiveProps(props) {
@@ -51,10 +55,19 @@ export default class AudioPlayer extends Component {
         this.audio.play();
     }
 
+    moveTracker() {
+        let currentProgress = this.audio.currentTime / this.audio.duration;
+        let lineWidth = ($("#audio-line").css("width"));
+        lineWidth = parseInt(lineWidth.substring(0, lineWidth.length - 2));
+        let currentPosition = currentProgress * lineWidth;
+        currentPosition = currentPosition + 136;
+        this.tracker.css("margin-left", `${currentPosition}px`)
+    }
+
     renderTrackInfo() {
         if (this.state.currentTrack.title) {
             return (
-                <div>
+                <div id="track-info">
                     <span id="current-track-title">{this.state.currentTrack.title}</span>
                     <span id="current-track-date">{this.state.currentTrack.venue} - {this.state.currentTrack.city}, {this.state.currentTrack.date}</span>
                 </div>
@@ -69,26 +82,30 @@ export default class AudioPlayer extends Component {
                     src={this.state.currentTrack.url}
                     type="audio/ogg"
                 />
-                <FontAwesomeIcon
-                    className="direction-button"
-                    icon={faBackward}
-                />
-                <FontAwesomeIcon
-                    className="play-button"
-                    icon={this.state.icon}
-                    onClick={() => {
-                        if (this.audio.paused) {
-                            this.resumeTrack();
-                        } else {
-                            this.pauseTrack();
-                        }
-                    }}
-                />
-                <FontAwesomeIcon
-                    className="direction-button"
-                    icon={faForward}
-                />
+                <div id="buttons" className="d-flex align-items-center">
+                    <FontAwesomeIcon
+                        className="direction-button"
+                        icon={faBackward}
+                    />
+                    <FontAwesomeIcon
+                        className="play-button"
+                        icon={this.state.icon}
+                        onClick={() => {
+                            if (this.audio.paused) {
+                                this.resumeTrack();
+                            } else {
+                                this.pauseTrack();
+                            }
+                        }}
+                    />
+                    <FontAwesomeIcon
+                        className="direction-button"
+                        icon={faForward}
+                    />
+                </div>
                 {this.renderTrackInfo()}
+                <div id="audio-line"></div>
+                <div id="tracker"></div>
             </div >
         );
     }
