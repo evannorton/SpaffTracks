@@ -139,6 +139,14 @@ header {
     bottom: 10px;
 }
 
+#timing {
+    font-size: 1.5em;
+    color: white;
+    position: absolute;
+    right: 5%;
+    bottom: 27px;
+}
+
 #audio-line {
     background-color: red;
     height: 5px;
@@ -159,5 +167,4 @@ header {
     left: 5%;
     bottom: 8px;
     position: fixed;
-
 }

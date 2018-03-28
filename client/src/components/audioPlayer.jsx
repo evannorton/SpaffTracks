@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "babel-polyfill";
 
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
@@ -47,6 +47,60 @@ export default class AudioPlayer extends Component {
         await this.setState({ currentTrack: track })
         this.audio.currentTime = 0;
         this.audio.play();
+    }
+
+    async playPreviousTrack() {
+        let tracks = this.state.tracks;
+        let currentTrack = this.state.currentTrack;
+        let set = currentTrack.set;
+        let position = currentTrack.position;
+        let newTrack;
+        if (set === "E") {
+            tracks.encore.forEach((track) => {
+                if (track.position === position - 1) {
+                    newTrack = track;
+                }
+            });
+            if (!newTrack) {
+                set = "3";
+                position = tracks.set3.length + 1;
+            }
+        }
+        if (set === "3") {
+            tracks.set3.forEach((track) => {
+                if (track.position === position - 1) {
+                    newTrack = track;
+                }
+            });
+            if (!newTrack) {
+                set = "2";
+                position = tracks.set2.length + 1;
+            }
+        }
+        if (set === "2") {
+            tracks.set2.forEach((track) => {
+                if (track.position === position - 1) {
+                    newTrack = track;
+                }
+            });
+            if (!newTrack) {
+                set = "1";
+                position = tracks.set1.length + 1;
+            }
+        }
+        if (set === "1") {
+            tracks.set1.forEach((track) => {
+                if (track.position === position - 1) {
+                    newTrack = track;
+                }
+            });
+        }
+        if (newTrack) {
+            await this.setState({ currentTrack: newTrack });
+            this.audio.play();
+        } else {
+            this.playTrack(currentTrack);
+        }
     }
 
     async playNextTrack() {
@@ -105,21 +159,40 @@ export default class AudioPlayer extends Component {
     }
 
     moveTracker() {
+        let currentTime = $("#timing");
+        let currentMinutes = Math.round(this.audio.currentTime / 60).toString();
+        let currentSeconds = Math.round(this.audio.currentTime % 60).toString();
+        if (currentSeconds.length === 1) {
+            currentSeconds = 0 + currentSeconds;
+        }
+        let durationMinutes = Math.round(this.audio.duration / 60).toString();
+        let durationSeconds = Math.round(this.audio.duration % 60).toString();
+        if (durationSeconds.length === 1) {
+            durationSeconds = 0 + durationSeconds;
+        }
+        if (this.audio.duration) {
+            currentTime.text(currentMinutes + ":" + currentSeconds + " / " + durationMinutes + ":" + durationSeconds);
+        } else {
+            currentTime.text("Loading...");
+        }
         let currentProgress = this.audio.currentTime / this.audio.duration;
         let lineWidth = ($("#audio-line").css("width"));
         lineWidth = parseInt(lineWidth.substring(0, lineWidth.length - 2));
         let currentPosition = currentProgress * lineWidth;
         currentPosition = currentPosition + 136;
-        this.tracker.css("margin-left", `${currentPosition}px`)
+        this.tracker.css("margin-left", `${currentPosition}px`);
     }
 
     renderTrackInfo() {
         if (this.state.currentTrack.title) {
             return (
-                <div id="track-info">
-                    <span id="current-track-title">{this.state.currentTrack.title}</span>
-                    <span id="current-track-date">{this.state.currentTrack.venue} - {this.state.currentTrack.city}, {this.state.currentTrack.date}</span>
-                </div>
+                <Fragment>
+                    <div id="track-info">
+                        <span id="current-track-title">{this.state.currentTrack.title}</span>
+                        <span id="current-track-date">{this.state.currentTrack.venue} - {this.state.currentTrack.city}, {this.state.currentTrack.date}</span>
+                    </div>
+                    <p id="timing"></p>
+                </Fragment>
             );
         }
     }
@@ -135,6 +208,7 @@ export default class AudioPlayer extends Component {
                     <FontAwesomeIcon
                         className="direction-button"
                         icon={faBackward}
+                        onClick={() => { this.playPreviousTrack() }}
                     />
                     <FontAwesomeIcon
                         className="play-button"
