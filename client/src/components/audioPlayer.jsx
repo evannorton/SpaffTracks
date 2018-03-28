@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "babel-polyfill";
 
 import FontAwesomeIcon from "@fortawesome/react-fontawesome"
 import faPlayCircle from "@fortawesome/fontawesome-free-solid/faPlayCircle"
@@ -19,17 +20,35 @@ export default class AudioPlayer extends Component {
         this.audio = $("audio")[0];
     }
 
-    componentWillReceiveProps(props) {
-        this.setState({ currentTrack: props.clickedTrack })
+    async componentWillReceiveProps(props) {
+        // if clicked track exists
+        if (props.clickedTrack.url) {
+            this.playTrack(props.clickedTrack.url);
+        }
+    }
+
+    async playTrack(track) {
+        await this.setState({ currentTrack: track })
+        this.setState({ icon: faPauseCircle });
+        this.audio.currentTime = 0;
+        this.audio.play();
+    }
+
+    pauseTrack() {
+        this.setState({ icon: faPlayCircle });
+        this.audio.pause();
+    }
+
+    resumeTrack() {
+        this.setState({ icon: faPauseCircle });
+        this.audio.play();
     }
 
     handlePlayButtonClick() {
         if (this.audio.paused) {
-            this.setState({ icon: faPauseCircle });
-            this.audio.play();
+            this.resumeTrack();
         } else {
-            this.setState({ icon: faPlayCircle });
-            this.audio.pause();
+            this.pauseTrack();
         }
     }
 
