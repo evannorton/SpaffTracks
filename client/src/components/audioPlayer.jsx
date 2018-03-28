@@ -12,6 +12,7 @@ export default class AudioPlayer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            tracks: [],
             currentTrack: {
                 url: "",
                 title: "",
@@ -29,13 +30,14 @@ export default class AudioPlayer extends Component {
     componentDidMount() {
         this.audio = $("audio")[0];
         this.audio.ontimeupdate = () => { this.moveTracker() };
-        this.audio.onended = () => { this.setState({ icon: faPlayCircle }); };
+        this.audio.onended = () => { this.playNextTrack() };
         this.audio.onplay = () => { this.setState({ icon: faPauseCircle }); };
         this.audio.onpause = () => { this.setState({ icon: faPlayCircle }); };
         this.tracker = $("#tracker");
     }
 
     componentWillReceiveProps(props) {
+        this.setState({ tracks: props.tracks });
         if (props.wasClicked) {
             this.playTrack(props.clickedTrack);
         }
@@ -45,6 +47,61 @@ export default class AudioPlayer extends Component {
         await this.setState({ currentTrack: track })
         this.audio.currentTime = 0;
         this.audio.play();
+    }
+
+    async playNextTrack() {
+        let tracks = this.state.tracks;
+        let currentTrack = this.state.currentTrack;
+        let set = currentTrack.set;
+        let position = currentTrack.position;
+        let newTrack;
+        if (set === "1") {
+            tracks.set1.forEach((track) => {
+                if (track.position === position + 1) {
+                    newTrack = track;
+                }
+            });
+            if (!newTrack) {
+                set = "2";
+                position = 0;
+            }
+        }
+        if (set === "2") {
+            tracks.set2.forEach((track) => {
+                if (track.position === position + 1) {
+                    newTrack = track;
+                }
+            });
+            if (!newTrack) {
+                set = "3";
+                position = 0;
+            }
+        }
+        if (set === "3") {
+            tracks.set3.forEach((track) => {
+                if (track.position === position + 1) {
+                    newTrack = track;
+                }
+            });
+            if (!newTrack) {
+                set = "E";
+                position = 0;
+            }
+        }
+        if (set === "E") {
+            tracks.encore.forEach((track) => {
+                if (track.position === position + 1) {
+                    newTrack = track;
+                }
+            });
+        }
+        if (newTrack) {
+            await this.setState({ currentTrack: newTrack });
+            this.audio.play();
+        } else {
+            this.setState({ currentTrack: tracks[Object.keys(tracks)[0]][0] });
+            this.setState({ icon: faPlayCircle });
+        }
     }
 
     moveTracker() {
@@ -93,6 +150,7 @@ export default class AudioPlayer extends Component {
                     <FontAwesomeIcon
                         className="direction-button"
                         icon={faForward}
+                        onClick={() => { this.playNextTrack() }}
                     />
                 </div>
                 {this.renderTrackInfo()}
