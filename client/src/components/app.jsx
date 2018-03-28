@@ -13,16 +13,17 @@ export default class App extends Component {
         super(props);
         this.state = {
             tracks: [],
-            clickedTrack: {}
+            clickedTrack: {},
+            wasClicked: false
         }
     }
 
     setTracks(tracks) {
-        this.setState({ tracks });
+        this.setState({ tracks, wasClicked: false });
     }
 
     setClickedTrack(clickedTrack) {
-        this.setState({ clickedTrack });
+        this.setState({ clickedTrack, wasClicked: true });
     }
 
     render() {
@@ -44,7 +45,11 @@ export default class App extends Component {
                             )}
                         />
                     </Switch>
-                    <AudioPlayer tracks={this.state.tracks} clickedTrack={this.state.clickedTrack} />
+                    <AudioPlayer
+                        tracks={this.state.tracks}
+                        clickedTrack={this.state.clickedTrack}
+                        wasClicked={this.state.wasClicked}
+                    />
                 </Fragment>
             </Router>
         );

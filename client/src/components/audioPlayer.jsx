@@ -20,9 +20,8 @@ export default class AudioPlayer extends Component {
         this.audio = $("audio")[0];
     }
 
-    async componentWillReceiveProps(props) {
-        // if clicked track exists
-        if (props.clickedTrack.url) {
+    componentWillReceiveProps(props) {
+        if (props.wasClicked) {
             this.playTrack(props.clickedTrack.url);
         }
     }
@@ -44,14 +43,6 @@ export default class AudioPlayer extends Component {
         this.audio.play();
     }
 
-    handlePlayButtonClick() {
-        if (this.audio.paused) {
-            this.resumeTrack();
-        } else {
-            this.pauseTrack();
-        }
-    }
-
     render() {
         return (
             <div id="audio-player" className="container-fluid">
@@ -61,7 +52,13 @@ export default class AudioPlayer extends Component {
                 />
                 <FontAwesomeIcon id="play-button"
                     icon={this.state.icon}
-                    onClick={() => { this.handlePlayButtonClick() }}
+                    onClick={() => {
+                        if (this.audio.paused) {
+                            this.resumeTrack();
+                        } else {
+                            this.pauseTrack();
+                        }
+                    }}
                 />
             </div >
         );
