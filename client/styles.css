@@ -5,6 +5,10 @@ body {
     font-family: 'Permanent Marker', cursive;
 }
 
+p {
+    margin: 0;
+}
+
 .row {
     width: 100%;
     margin: 0;
@@ -97,8 +101,27 @@ header {
     background-color: black;
 }
 
-#play-button {
+.play-button {
+    margin: 0 .25em;
     color: red;
     font-size: 3em;
     cursor: pointer;
+}
+
+.direction-button {
+    color: red;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+#current-track-title {
+    font-size: 2em;
+    color: white;
+    margin: 0 .5em;
+}
+
+#current-track-date {
+    font-size: 1.5em;
+    color: white;
+    margin: 0 .5em;
 }

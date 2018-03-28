@@ -20,7 +20,6 @@ export default class Tracks extends Component {
     }
 
     componentDidMount() {
-        console.log('hello');
         get('/tracks/show/' + this.props.match.params.date)
             .then((tracks) => {
                 this.setState({ tracks });
