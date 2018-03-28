@@ -29,6 +29,9 @@ export default class AudioPlayer extends Component {
     componentDidMount() {
         this.audio = $("audio")[0];
         this.audio.ontimeupdate = () => { this.moveTracker() };
+        this.audio.onended = () => { this.setState({ icon: faPlayCircle }); };
+        this.audio.onplay = () => { this.setState({ icon: faPauseCircle }); };
+        this.audio.onpause = () => { this.setState({ icon: faPlayCircle }); };
         this.tracker = $("#tracker");
     }
 
@@ -40,18 +43,7 @@ export default class AudioPlayer extends Component {
 
     async playTrack(track) {
         await this.setState({ currentTrack: track })
-        this.setState({ icon: faPauseCircle });
         this.audio.currentTime = 0;
-        this.audio.play();
-    }
-
-    pauseTrack() {
-        this.setState({ icon: faPlayCircle });
-        this.audio.pause();
-    }
-
-    resumeTrack() {
-        this.setState({ icon: faPauseCircle });
         this.audio.play();
     }
 
@@ -92,9 +84,9 @@ export default class AudioPlayer extends Component {
                         icon={this.state.icon}
                         onClick={() => {
                             if (this.audio.paused) {
-                                this.resumeTrack();
+                                this.audio.play();
                             } else {
-                                this.pauseTrack();
+                                this.audio.pause();
                             }
                         }}
                     />
