@@ -2,6 +2,7 @@
 
 body {
     background-color: red;
+    font-family: 'Permanent Marker', cursive;
 }
 
 .row {
@@ -37,13 +38,31 @@ body {
 }
 
 .bubble-tile:hover {
-    background-color: rgba(0, 0, 0, 0.25);
     color: white;
+    background-color: rgba(0, 0, 0, 0.25);
     text-decoration: none;
 }
 
 .bubble .row {
     border-top: 2px solid black;
+}
+
+.track {
+    color: rgb(168, 168, 168);
+}
+
+.track:hover {
+    color: rgb(168, 168, 168);
+}
+
+.set-label {
+    color: white;
+    cursor: auto;
+    font-size: 1em;
+}
+
+.set-label:hover {
+    background-color: unset;
 }
 
 /* Header */
