@@ -21,6 +21,7 @@ router.get('/show/:date', (req, res) => {
 
     tracks.getTracksByShow(date)
         .then((tracks) => {
+            console.log(tracks);
             tracks = tracks[0];
             let set1 = [];
             let set2 = [];
