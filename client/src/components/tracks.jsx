@@ -22,8 +22,8 @@ export default class Tracks extends Component {
     componentDidMount() {
         get('/tracks/show/' + this.props.match.params.date)
             .then((tracks) => {
-                console.log(tracks.set1);
                 this.setState({ tracks });
+                this.props.setTracks(tracks);
             });
     }
 
@@ -37,7 +37,7 @@ export default class Tracks extends Component {
                     {
                         this.state.tracks.set1.map((track) => {
                             return (
-                                <Track key={track.id} track={track} />
+                                <Track key={track.id} track={track} setClickedTrack={this.props.setClickedTrack} />
                             );
                         })
                     }
@@ -56,7 +56,7 @@ export default class Tracks extends Component {
                     {
                         this.state.tracks.set2.map((track) => {
                             return (
-                                <Track key={track.id} track={track} />
+                                <Track key={track.id} track={track} setClickedTrack={this.props.setClickedTrack} />
                             );
                         })
                     }
@@ -75,7 +75,7 @@ export default class Tracks extends Component {
                     {
                         this.state.tracks.set3.map((track) => {
                             return (
-                                <Track key={track.id} track={track} />
+                                <Track key={track.id} track={track} setClickedTrack={this.props.setClickedTrack} />
                             );
                         })
                     }
@@ -94,7 +94,7 @@ export default class Tracks extends Component {
                     {
                         this.state.tracks.encore.map((track) => {
                             return (
-                                <Track key={track.id} track={track} />
+                                <Track key={track.id} track={track} setClickedTrack={this.props.setClickedTrack} />
                             );
                         })
                     }

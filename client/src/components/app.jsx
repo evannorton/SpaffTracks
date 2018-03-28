@@ -9,6 +9,22 @@ import AudioPlayer from './audioPlayer';
 
 export default class App extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            tracks: [],
+            clickedTrack: {}
+        }
+    }
+
+    setTracks(tracks) {
+        this.setState({ tracks });
+    }
+
+    setClickedTrack(clickedTrack) {
+        this.setState({ clickedTrack });
+    }
+
     render() {
         return (
             <Router>
@@ -17,9 +33,18 @@ export default class App extends Component {
                     <Switch>
                         <Route exact path="/" component={Years} />
                         <Route exact path="/year/:year" component={Shows} />
-                        <Route exact path="/show/:date" component={Tracks} />
+                        <Route
+                            exact path="/show/:date"
+                            render={(routeProps) => (
+                                <Tracks
+                                    {...routeProps}
+                                    setTracks={(tracks) => { this.setTracks(tracks) }}
+                                    setClickedTrack={(track) => { this.setClickedTrack(track) }}
+                                />
+                            )}
+                        />
                     </Switch>
-                    <AudioPlayer />
+                    <AudioPlayer tracks={this.state.tracks} clickedTrack={this.state.clickedTrack} />
                 </Fragment>
             </Router>
         );

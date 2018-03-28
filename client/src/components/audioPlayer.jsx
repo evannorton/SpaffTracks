@@ -1,21 +1,26 @@
-import React, { Component } from 'react';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import faPlayCircle from '@fortawesome/fontawesome-free-solid/faPlayCircle'
-import faPauseCircle from '@fortawesome/fontawesome-free-solid/faPauseCircle'
+import React, { Component } from "react";
+
+import FontAwesomeIcon from "@fortawesome/react-fontawesome"
+import faPlayCircle from "@fortawesome/fontawesome-free-solid/faPlayCircle"
+import faPauseCircle from "@fortawesome/fontawesome-free-solid/faPauseCircle"
 
 export default class AudioPlayer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            currentTrack: 'https://archive.org/download/Spafford2012-08-24/01.AintThatWrong.flac',
+            currentTrack: this.props.track,
             icon: faPlayCircle
         }
         this.audio;
     }
 
     componentDidMount() {
-        this.audio = $('audio')[0];
+        this.audio = $("audio")[0];
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({ currentTrack: props.clickedTrack })
     }
 
     handlePlayButtonClick() {
