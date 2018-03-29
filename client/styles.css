@@ -93,12 +93,28 @@ header {
 
 /* Audio Player */
 
+#pre-audio {
+    height: 75px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 1em 5%;
+    background-color: black;
+}
+
+#pre-audio p {
+    margin: 0;
+    color: white;
+    font-size: 2em;
+}
+
 #audio-player {
     height: 75px;
     position: fixed;
     bottom: 0;
     padding: 1em 5%;
     background-color: black;
+    visibility: hidden;
 }
 
 #buttons {

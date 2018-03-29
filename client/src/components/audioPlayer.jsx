@@ -39,6 +39,8 @@ export default class AudioPlayer extends Component {
     componentWillReceiveProps(props) {
         this.setState({ tracks: props.tracks });
         if (props.wasClicked) {
+            $("#audio-player").css("visibility", "visible");
+            $("#pre-audio").css("visibility", "hidden");
             this.playTrack(props.clickedTrack);
         }
     }
@@ -199,38 +201,47 @@ export default class AudioPlayer extends Component {
 
     render() {
         return (
-            <div id="audio-player" className="d-flex container-fluid align-items-center">
-                <audio
-                    src={this.state.currentTrack.url}
-                    type="audio/ogg"
-                />
-                <div id="buttons" className="d-flex align-items-center">
-                    <FontAwesomeIcon
-                        className="direction-button"
-                        icon={faBackward}
-                        onClick={() => { this.playPreviousTrack() }}
+            <Fragment>
+                <div id="audio-player" className="d-flex container-fluid align-items-center">
+                    <audio
+                        src={this.state.currentTrack.url}
+                        type="audio/ogg"
                     />
-                    <FontAwesomeIcon
-                        className="play-button"
-                        icon={this.state.icon}
-                        onClick={() => {
-                            if (this.audio.paused) {
-                                this.audio.play();
-                            } else {
-                                this.audio.pause();
-                            }
-                        }}
-                    />
-                    <FontAwesomeIcon
-                        className="direction-button"
-                        icon={faForward}
-                        onClick={() => { this.playNextTrack() }}
-                    />
+                    <div id="buttons" className="d-flex align-items-center">
+                        <FontAwesomeIcon
+                            className="direction-button"
+                            icon={faBackward}
+                            onClick={() => { this.playPreviousTrack() }}
+                        />
+                        <FontAwesomeIcon
+                            className="play-button"
+                            icon={this.state.icon}
+                            onClick={() => {
+                                if (this.audio.paused) {
+                                    this.audio.play();
+                                } else {
+                                    this.audio.pause();
+                                }
+                            }}
+                        />
+                        <FontAwesomeIcon
+                            className="direction-button"
+                            icon={faForward}
+                            onClick={() => { this.playNextTrack() }}
+                        />
+                    </div>
+                    {this.renderTrackInfo()}
+                    <div id="audio-line"></div>
+                    <div id="tracker"></div>
+                </div >
+                <div id="pre-audio">
+                    <div className="row">
+                        <div className="col-12 d-flex justify-content-center align-items-center">
+                            <p>Select a track to play!</p>
+                        </div>
+                    </div>
                 </div>
-                {this.renderTrackInfo()}
-                <div id="audio-line"></div>
-                <div id="tracker"></div>
-            </div >
+            </Fragment>
         );
     }
 
