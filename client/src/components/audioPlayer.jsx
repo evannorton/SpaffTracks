@@ -162,10 +162,17 @@ export default class AudioPlayer extends Component {
 
     moveTracker() {
         let currentTime = $("#timing");
-        let currentMinutes = Math.round(this.audio.currentTime / 60).toString();
+        let currentMinutes = Math.floor(this.audio.currentTime / 60).toString();
         let currentSeconds = Math.round(this.audio.currentTime % 60).toString();
         if (currentSeconds.length === 1) {
             currentSeconds = 0 + currentSeconds;
+        }
+        if (currentMinutes > 0) {
+            currentMinutes++;
+        }
+        if (currentSeconds == 60) {
+            currentSeconds = "00";
+            currentMinutes++;
         }
         let durationMinutes = Math.round(this.audio.duration / 60).toString();
         let durationSeconds = Math.round(this.audio.duration % 60).toString();
@@ -180,6 +187,18 @@ export default class AudioPlayer extends Component {
         let currentProgress = this.audio.currentTime / this.audio.duration;
         let lineWidth = ($("#audio-line").css("width"));
         lineWidth = parseInt(lineWidth.substring(0, lineWidth.length - 2));
+        let currentPosition = currentProgress * lineWidth;
+        currentPosition = currentPosition + 136;
+        this.tracker.css("margin-left", `${currentPosition}px`);
+    }
+
+    jumpPosition(e) {
+        let newPosition = (e.clientX - 146) - $(window).width() * .05;
+        let lineWidth = ($("#audio-line").css("width"));
+        lineWidth = parseInt(lineWidth.substring(0, lineWidth.length - 2));
+        let percent = newPosition / lineWidth;
+        this.audio.currentTime = percent * this.audio.duration;
+        let currentProgress = this.audio.currentTime / this.audio.duration;
         let currentPosition = currentProgress * lineWidth;
         currentPosition = currentPosition + 136;
         this.tracker.css("margin-left", `${currentPosition}px`);
@@ -231,7 +250,10 @@ export default class AudioPlayer extends Component {
                         />
                     </div>
                     {this.renderTrackInfo()}
-                    <div id="audio-line"></div>
+                    <div
+                        id="audio-line"
+                        onClick={(e) => { this.jumpPosition(e) }}
+                    ></div>
                     <div id="tracker"></div>
                 </div >
                 <div id="pre-audio">
