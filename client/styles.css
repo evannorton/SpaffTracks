@@ -1,6 +1,7 @@
 /* General */
 
 body {
+    text-align: center;
     background-color: red;
     font-family: 'Permanent Marker', cursive;
 }
@@ -52,6 +53,7 @@ p {
 }
 
 .track {
+    font-size: 0.9em;
     color: rgb(168, 168, 168);
 }
 
