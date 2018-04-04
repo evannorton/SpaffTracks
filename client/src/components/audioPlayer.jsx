@@ -165,22 +165,19 @@ export default class AudioPlayer extends Component {
 
     moveTracker() {
         let currentTime = $("#timing");
+        console.log(this.audio.currentTime % 60);
         let currentMinutes = Math.floor(this.audio.currentTime / 60).toString();
-        let currentSeconds = Math.round(this.audio.currentTime % 60).toString();
+        let currentSeconds = Math.floor(this.audio.currentTime % 60).toString();
+        if (currentSeconds == "60") {
+            currentSeconds = "0";
+        }
         if (currentSeconds.length === 1) {
-            currentSeconds = 0 + currentSeconds;
+            currentSeconds = "0" + currentSeconds;
         }
-        if (currentMinutes > 0) {
-            currentMinutes++;
-        }
-        if (currentSeconds == 60) {
-            currentSeconds = "00";
-            currentMinutes++;
-        }
-        let durationMinutes = Math.round(this.audio.duration / 60).toString();
-        let durationSeconds = Math.round(this.audio.duration % 60).toString();
+        let durationMinutes = Math.floor(this.audio.duration / 60).toString();
+        let durationSeconds = Math.floor(this.audio.duration % 60).toString();
         if (durationSeconds.length === 1) {
-            durationSeconds = 0 + durationSeconds;
+            durationSeconds = "0" + durationSeconds;
         }
         if (this.audio.duration) {
             currentTime.text(currentMinutes + ":" + currentSeconds + " / " + durationMinutes + ":" + durationSeconds);
@@ -209,7 +206,7 @@ export default class AudioPlayer extends Component {
 
     async dragPosition() {
         await this.setState({ trackerIsHeld: true });
-        this.tracker.mousemove((e) => {
+        $(document).mousemove((e) => {
             if (this.state.trackerIsHeld) {
                 this.jumpPosition(e);
             }
@@ -239,7 +236,7 @@ export default class AudioPlayer extends Component {
                 <div id="audio-player" className="d-flex container-fluid align-items-center">
                     <audio
                         src={this.state.currentTrack.url}
-                        type="audio/ogg"
+                        type="audio/mp3"
                     />
                     <div id="buttons" className="d-flex align-items-center">
                         <FontAwesomeIcon
