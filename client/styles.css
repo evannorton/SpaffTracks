@@ -183,4 +183,5 @@ header {
     left: 5%;
     bottom: 8px;
     position: fixed;
+    user-select: none;
 }

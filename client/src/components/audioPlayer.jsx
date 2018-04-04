@@ -21,10 +21,12 @@ export default class AudioPlayer extends Component {
                 city: ""
             },
             icon: faPlayCircle,
-            trackerPosition: 0
+            trackerPosition: 0,
+            trackerIsHeld: false
         }
         this.audio;
         this.tracker;
+        this.audioLine;
     }
 
     componentDidMount() {
@@ -34,6 +36,7 @@ export default class AudioPlayer extends Component {
         this.audio.onplay = () => { this.setState({ icon: faPauseCircle }); };
         this.audio.onpause = () => { this.setState({ icon: faPlayCircle }); };
         this.tracker = $("#tracker");
+        this.audioLine = $("#audio-line");
     }
 
     componentWillReceiveProps(props) {
@@ -185,7 +188,7 @@ export default class AudioPlayer extends Component {
             currentTime.text("Loading...");
         }
         let currentProgress = this.audio.currentTime / this.audio.duration;
-        let lineWidth = ($("#audio-line").css("width"));
+        let lineWidth = this.audioLine.css("width");
         lineWidth = parseInt(lineWidth.substring(0, lineWidth.length - 2));
         let currentPosition = currentProgress * lineWidth;
         currentPosition = currentPosition + 136;
@@ -194,7 +197,7 @@ export default class AudioPlayer extends Component {
 
     jumpPosition(e) {
         let newPosition = (e.clientX - 146) - $(window).width() * .05;
-        let lineWidth = ($("#audio-line").css("width"));
+        let lineWidth = this.audioLine.css("width");
         lineWidth = parseInt(lineWidth.substring(0, lineWidth.length - 2));
         let percent = newPosition / lineWidth;
         this.audio.currentTime = percent * this.audio.duration;
@@ -202,6 +205,18 @@ export default class AudioPlayer extends Component {
         let currentPosition = currentProgress * lineWidth;
         currentPosition = currentPosition + 136;
         this.tracker.css("margin-left", `${currentPosition}px`);
+    }
+
+    async dragPosition() {
+        await this.setState({ trackerIsHeld: true });
+        this.tracker.mousemove((e) => {
+            if (this.state.trackerIsHeld) {
+                this.jumpPosition(e);
+            }
+        });
+        $(document).mouseup(() => {
+            this.setState({ trackerIsHeld: false });
+        });
     }
 
     renderTrackInfo() {
@@ -254,7 +269,10 @@ export default class AudioPlayer extends Component {
                         id="audio-line"
                         onClick={(e) => { this.jumpPosition(e) }}
                     ></div>
-                    <div id="tracker"></div>
+                    <div
+                        id="tracker"
+                        onMouseDown={() => { this.dragPosition() }}
+                    ></div>
                 </div >
                 <div id="pre-audio">
                     <div className="row">
