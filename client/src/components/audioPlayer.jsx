@@ -165,7 +165,6 @@ export default class AudioPlayer extends Component {
 
     moveTracker() {
         let currentTime = $("#timing");
-        console.log(this.audio.currentTime % 60);
         let currentMinutes = Math.floor(this.audio.currentTime / 60).toString();
         let currentSeconds = Math.floor(this.audio.currentTime % 60).toString();
         if (currentSeconds == "60") {
@@ -188,19 +187,19 @@ export default class AudioPlayer extends Component {
         let lineWidth = this.audioLine.css("width");
         lineWidth = parseInt(lineWidth.substring(0, lineWidth.length - 2));
         let currentPosition = currentProgress * lineWidth;
-        currentPosition = currentPosition + 136;
+        currentPosition = currentPosition + 138;
         this.tracker.css("margin-left", `${currentPosition}px`);
     }
 
     jumpPosition(e) {
-        let newPosition = (e.clientX - 146) - $(window).width() * .05;
+        let newPosition = (e.clientX - 161);
         let lineWidth = this.audioLine.css("width");
         lineWidth = parseInt(lineWidth.substring(0, lineWidth.length - 2));
         let percent = newPosition / lineWidth;
         this.audio.currentTime = percent * this.audio.duration;
         let currentProgress = this.audio.currentTime / this.audio.duration;
         let currentPosition = currentProgress * lineWidth;
-        currentPosition = currentPosition + 136;
+        currentPosition = currentPosition + 138;
         this.tracker.css("margin-left", `${currentPosition}px`);
     }
 
@@ -216,13 +215,51 @@ export default class AudioPlayer extends Component {
         });
     }
 
+    toggleDate() {
+        let date = $("#date");
+        let height = (date.css("height"));
+        height = "" + height + "";
+        height = height.substring(0, height.length - 2);
+        if (height > 11) {
+            date.css("visibility", "hidden");
+        } else {
+            date.css("visibility", "visible");
+        }
+    }
+
+    toggleTitle() {
+        let title = $("#title");
+        let position = "" + title.css("width") + "";
+        if (position !== "undefined") {
+            position = position.substring(0, position.length - 2);
+            position = parseInt(position) + 350;
+            console.log(position, $(window).width());
+            if (position > $(window).width()) {
+                title.css("visibility", "hidden");
+            } else {
+                title.css("visibility", "visible");
+            }
+        }
+
+    }
+
     renderTrackInfo() {
+        this.toggleDate();
+        this.toggleTitle();
+        $(window).on('resize', () => {
+            this.toggleDate();
+            this.toggleTitle();
+        });
         if (this.state.currentTrack.title) {
             return (
                 <Fragment>
                     <div id="track-info">
-                        <span id="current-track-title">{this.state.currentTrack.title}</span>
-                        <span id="current-track-date">{this.state.currentTrack.venue} - {this.state.currentTrack.city}, {this.state.currentTrack.date}</span>
+                        <div id="title">
+                            {this.state.currentTrack.title}
+                        </div>
+                        <div id="date">
+                            {this.state.currentTrack.venue}, {this.state.currentTrack.city}, {this.state.currentTrack.date}
+                        </div>
                     </div>
                     <p id="timing"></p>
                 </Fragment>

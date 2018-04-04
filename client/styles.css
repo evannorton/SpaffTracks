@@ -96,6 +96,7 @@ header {
 /* Audio Player */
 
 #pre-audio {
+    user-select: none;
     height: 75px;
     position: fixed;
     width: 100%;
@@ -111,10 +112,10 @@ header {
 }
 
 #audio-player {
+    user-select: none;
     height: 75px;
     position: fixed;
     bottom: 0;
-    padding: 1em 5%;
     background-color: black;
     visibility: hidden;
 }
@@ -137,32 +138,37 @@ header {
 }
 
 #track-info {
+    margin-right: 160px;
+    display: flex;
+    align-items: flex-end;
+    text-align: left;
+    color: white;
     position: absolute;
-    left: 230px;
-}
-
-#current-track-title {
+    left: 175px;
+    height: 38px;
+    bottom: 35px;
+    line-height: .7;
     font-size: 2em;
-    color: white;
-    margin: 0 .5em;
-    position: relative;
-    bottom: 10px;
 }
 
-#current-track-date {
-    font-size: 1.5em;
-    color: white;
-    margin: 0 .5em;
-    position: relative;
-    bottom: 10px;
+#title {
+    display: flex;
+    align-items: flex-end;
+    margin-right: 20px;
+    white-space: nowrap;
+}
+
+#date {
+    font-size: 0.5em;
 }
 
 #timing {
     font-size: 1.5em;
     color: white;
     position: absolute;
-    right: 5%;
-    bottom: 27px;
+    right: 15px;
+    bottom: 34px;
+    line-height: 0.7;
 }
 
 #audio-line {
@@ -179,11 +185,14 @@ header {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     margin-left: 136px;
-    left: 5%;
-    bottom: 8px;
+    bottom: 10px;
     position: fixed;
-    user-select: none;
+}
+
+@media (max-width:1350px) {
+
+
 }
