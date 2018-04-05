@@ -15,7 +15,7 @@ export default class App extends Component {
             tracks: [],
             clickedTrack: {},
             wasClicked: false,
-            page: "home",
+            page: "",
             year: "Loading...",
             date: "Loading...",
             spaffnerds: "/"
@@ -24,16 +24,19 @@ export default class App extends Component {
 
     setPage(page) {
         this.setState({ page });
+        this.setState({ wasClicked: false });
     }
 
     setYear(year) {
         this.setState({ year });
+        this.setState({ wasClicked: false });
     }
 
     setDate(date) {
         let spaffnerds = date.spaffnerds;
         date = date.date + " - " + date.venue + ", " + date.city;
         this.setState({ date, spaffnerds });
+        this.setState({ wasClicked: false });
     }
 
     setTracks(tracks) {

@@ -81,10 +81,22 @@ p {
 header {
     position: fixed;
     top: 0;
-    padding: 1em 0;
+    padding: 0.5em 0;
     background-color: black;
     z-index: 100;
     height: 75px;
+}
+
+.back-button {
+    color: white;
+    position: absolute;
+    top: 17px;
+    left: 15px;
+}
+
+.back-button:hover {
+    color: white;
+    text-decoration: none;
 }
 
 #header-date {

@@ -7,6 +7,22 @@ export default class Header extends Component {
         super(props);
     }
 
+    renderBackButton() {
+        if (this.props.page === "shows") {
+            return (
+                <Link to="/" className="back-button">
+                    ← Home
+                </Link>
+            );
+        } else if (this.props.page === "tracks" && this.props.date !== "Loading...") {
+            return (
+                <Link to={"/year/" + this.props.date.substring(0, 4)} className="back-button">
+                    ← {this.props.date.substring(0, 4)}
+                </Link>
+            );
+        }
+    }
+
     renderHeaderInfo() {
         if (this.props.page === "shows") {
             return (
@@ -31,6 +47,7 @@ export default class Header extends Component {
     render() {
         return (
             <header className="container-fluid d-flex align-items-center justify-content-center">
+                {this.renderBackButton()}
                 {this.renderHeaderInfo()}
             </header >
         );
