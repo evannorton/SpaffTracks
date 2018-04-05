@@ -23,24 +23,21 @@ export default class App extends Component {
     }
 
     setPage(page) {
-        this.setState({ page });
-        this.setState({ wasClicked: false });
+        this.setState({ page, date: "Loading...", year: "Loading...", spaffnerds: "/", wasClicked: false });
     }
 
     setYear(year) {
         this.setState({ year });
-        this.setState({ wasClicked: false });
     }
 
     setDate(date) {
         let spaffnerds = date.spaffnerds;
         date = date.date + " - " + date.venue + ", " + date.city;
         this.setState({ date, spaffnerds });
-        this.setState({ wasClicked: false });
     }
 
     setTracks(tracks) {
-        this.setState({ tracks, wasClicked: false });
+        this.setState({ tracks});
     }
 
     setClickedTrack(clickedTrack) {
