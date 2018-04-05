@@ -88,9 +88,10 @@ header {
 }
 
 .back-button {
+    font-size: 1.8em;
     color: white;
     position: absolute;
-    top: 17px;
+    top: 15px;
     left: 15px;
 }
 
@@ -226,11 +227,24 @@ header a:hover {
     header {
         font-size: .75em;
     }
+    .back-button {
+        top: 22px;
+    }
+}
+
+@media (max-width: 800px) {
+    header {
+        padding-left: 100px !important;
+        padding-right: 100px !important;
+    }
 }
 
 @media (max-width: 650px) {
+    .bubble {
+        font-size: 2.5em;
+    }
     header {
-        font-size: .7em;
+        font-size: .6em;
     }
     #date-header {
         margin-bottom: 0;
