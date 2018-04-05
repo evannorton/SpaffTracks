@@ -10,13 +10,13 @@ export default class Tracks extends Component {
         super(props);
         this.state = {
             tracks: {
+                soundcheck: [],
                 set1: [],
                 set2: [],
                 set3: [],
                 encore: []
             }
         }
-        this.asd = [];
     }
 
     componentDidMount() {
@@ -25,8 +25,32 @@ export default class Tracks extends Component {
             .then((tracks) => {
                 this.setState({ tracks });
                 this.props.setTracks(tracks);
-                this.props.setDate(tracks[Object.keys(tracks)[0]][0]);
+                for (let i = 0; i < Object.keys(tracks).length; i++) {
+                    if (tracks[Object.keys(tracks)[i]].length > 0) {
+                        this.props.setDate(tracks[Object.keys(tracks)[i]][0]);
+                        break;
+                    }
+                }
             });
+    }
+
+    renderSoundcheck() {
+        if (this.state.tracks.soundcheck.length > 0) {
+            return (
+                <Fragment>
+                    <div className="col-12 set-label bubble-tile d-flex align-items-center justify-content-center">
+                        Soundcheck
+                    </div>
+                    {
+                        this.state.tracks.soundcheck.map((track) => {
+                            return (
+                                <Track key={track.id} track={track} setClickedTrack={this.props.setClickedTrack} />
+                            );
+                        })
+                    }
+                </Fragment>
+            );
+        }
     }
 
     renderSet1() {
@@ -107,8 +131,9 @@ export default class Tracks extends Component {
 
     render() {
         return (
-            <div id="tracks" className="bubble container-fluid d-flex align-items-center justify-content-center">
+            <div id="tracks" className="bubble container-fluid d-flex align-items-start justify-content-center">
                 <div className="row">
+                    {this.renderSoundcheck()}
                     {this.renderSet1()}
                     {this.renderSet2()}
                     {this.renderSet3()}
