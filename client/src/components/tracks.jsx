@@ -20,10 +20,12 @@ export default class Tracks extends Component {
     }
 
     componentDidMount() {
+        this.props.setPage("tracks");
         get('/tracks/show/' + this.props.match.params.date)
             .then((tracks) => {
                 this.setState({ tracks });
                 this.props.setTracks(tracks);
+                this.props.setDate(tracks[Object.keys(tracks)[0]][0]);
             });
     }
 

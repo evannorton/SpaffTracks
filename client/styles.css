@@ -6,6 +6,12 @@ body {
     font-family: 'Permanent Marker', cursive;
 }
 
+h1  {
+    color: white;
+    font-size: 3.3em;
+    margin: 0;
+}
+
 p {
     margin: 0;
 }
@@ -21,8 +27,8 @@ p {
 
 /* Main */
 
-
 .bubble {
+    user-select: none;
     height: fit-content;
     min-height: 749px;
     width: 90%;
@@ -38,7 +44,6 @@ p {
 .bubble-tile {
     border-bottom: 2px solid black;
     cursor: pointer;
-    user-select: none;
     color: white;
 }
 
@@ -82,6 +87,20 @@ header {
     height: 75px;
 }
 
+#header-date {
+    margin-bottom: -5px;
+    font-size: 2em;
+}
+
+header a {
+    color: rgb(168, 168, 168);
+    font-size: 1.5em;
+}
+
+header a:hover {
+    color: rgb(168, 168, 168);
+}
+
 #logo-link {
     width: 350px;
     max-width: 100%;
@@ -96,7 +115,6 @@ header {
 /* Audio Player */
 
 #pre-audio {
-    user-select: none;
     height: 75px;
     position: fixed;
     width: 100%;
@@ -192,7 +210,17 @@ header {
     position: fixed;
 }
 
-@media (max-width:1350px) {
+@media (max-width: 1000px) {
+    header {
+        font-size: .75em;
+    }
+}
 
-
+@media (max-width: 650px) {
+    header {
+        font-size: .7em;
+    }
+    #date-header {
+        margin-bottom: 0;
+    }
 }

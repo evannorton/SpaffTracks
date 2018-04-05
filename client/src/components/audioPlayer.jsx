@@ -233,7 +233,6 @@ export default class AudioPlayer extends Component {
         if (position !== "undefined") {
             position = position.substring(0, position.length - 2);
             position = parseInt(position) + 350;
-            console.log(position, $(window).width());
             if (position > $(window).width()) {
                 title.css("visibility", "hidden");
             } else {

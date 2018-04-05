@@ -14,6 +14,7 @@ export default class Years extends Component {
     }
 
     componentDidMount() {
+        this.props.setPage("home");
         get('/years')
             .then((years) => {
                 this.setState({ years });

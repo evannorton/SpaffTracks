@@ -14,8 +14,26 @@ export default class App extends Component {
         this.state = {
             tracks: [],
             clickedTrack: {},
-            wasClicked: false
+            wasClicked: false,
+            page: "home",
+            year: "Loading...",
+            date: "Loading...",
+            spaffnerds: "/"
         }
+    }
+
+    setPage(page) {
+        this.setState({ page });
+    }
+
+    setYear(year) {
+        this.setState({ year });
+    }
+
+    setDate(date) {
+        let spaffnerds = date.spaffnerds;
+        date = date.date + " - " + date.venue + ", " + date.city;
+        this.setState({ date, spaffnerds });
     }
 
     setTracks(tracks) {
@@ -30,15 +48,34 @@ export default class App extends Component {
         return (
             <Router>
                 <Fragment>
-                    <Header />
+                    <Header page={this.state.page} year={this.state.year} date={this.state.date} spaffnerds={this.state.spaffnerds} />
                     <Switch>
-                        <Route exact path="/" component={Years} />
-                        <Route exact path="/year/:year" component={Shows} />
+                        <Route
+                            exact path="/"
+                            render={(routeProps) => (
+                                <Years
+                                    {...routeProps}
+                                    setPage={(page) => { this.setPage(page) }}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact path="/year/:year"
+                            render={(routeProps) => (
+                                <Shows
+                                    {...routeProps}
+                                    setPage={(page) => { this.setPage(page) }}
+                                    setYear={(year) => { this.setYear(year) }}
+                                />
+                            )}
+                        />
                         <Route
                             exact path="/show/:date"
                             render={(routeProps) => (
                                 <Tracks
                                     {...routeProps}
+                                    setPage={(page) => { this.setPage(page) }}
+                                    setDate={(date) => { this.setDate(date) }}
                                     setTracks={(tracks) => { this.setTracks(tracks) }}
                                     setClickedTrack={(track) => { this.setClickedTrack(track) }}
                                 />

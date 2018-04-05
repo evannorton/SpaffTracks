@@ -14,6 +14,8 @@ export default class Shows extends Component {
     }
 
     componentDidMount() {
+        this.props.setPage("shows");
+        this.props.setYear(this.props.match.params.year);
         get("/shows/year/" + this.props.match.params.year)
             .then((shows) => {
                 this.setState({ shows });
