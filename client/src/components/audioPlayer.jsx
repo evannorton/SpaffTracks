@@ -18,11 +18,12 @@ export default class AudioPlayer extends Component {
                 title: "",
                 date: "",
                 venue: "",
-                city: ""
+                city: "",
             },
             icon: faPlayCircle,
             trackerPosition: 0,
-            trackerIsHeld: false
+            trackerIsHeld: false,
+            infoSize: "2em"
         }
         this.audio;
         this.tracker;
@@ -42,6 +43,7 @@ export default class AudioPlayer extends Component {
     componentWillReceiveProps(props) {
         this.setState({ tracks: props.tracks });
         if (props.wasClicked) {
+            this.setInfoSize(props.clickedTrack);
             $("#audio-player").css("visibility", "visible");
             $("#pre-audio").css("visibility", "hidden");
             this.playTrack(props.clickedTrack);
@@ -101,6 +103,7 @@ export default class AudioPlayer extends Component {
             });
         }
         if (newTrack) {
+            this.setInfoSize(newTrack);
             await this.setState({ currentTrack: newTrack });
             this.audio.play();
         } else {
@@ -155,6 +158,7 @@ export default class AudioPlayer extends Component {
             });
         }
         if (newTrack) {
+            this.setInfoSize(newTrack);
             await this.setState({ currentTrack: newTrack });
             this.audio.play();
         } else {
@@ -215,44 +219,28 @@ export default class AudioPlayer extends Component {
         });
     }
 
-    toggleDate() {
-        let date = $("#date");
-        let height = (date.css("height"));
-        height = "" + height + "";
-        height = height.substring(0, height.length - 2);
-        if (height > 11) {
-            date.css("visibility", "hidden");
+    setInfoSize(track) {
+        let length = track.title.length + track.venue.length + track.city.length + 8;
+        console.log(175 / length);
+        if (length > 50 && 160 / length <= 1.82) {
+            let infoSize = 160 / length;
+            infoSize = "" + infoSize + "vw";
+            this.setState({ infoSize, infoWrap: "unset" });
         } else {
-            date.css("visibility", "visible");
+            this.setState({ infoSize: "2em", infoWrap: "nowrap" });
         }
-    }
-
-    toggleTitle() {
-        let title = $("#title");
-        let position = "" + title.css("width") + "";
-        if (position !== "undefined") {
-            position = position.substring(0, position.length - 2);
-            position = parseInt(position) + 350;
-            if (position > $(window).width()) {
-                title.css("visibility", "hidden");
-            } else {
-                title.css("visibility", "visible");
-            }
-        }
-
     }
 
     renderTrackInfo() {
-        this.toggleDate();
-        this.toggleTitle();
-        $(window).on('resize', () => {
-            this.toggleDate();
-            this.toggleTitle();
-        });
         if (this.state.currentTrack.title) {
             return (
                 <Fragment>
-                    <div id="track-info">
+                    <div
+                        style={{
+                            fontSize: this.state.infoSize,
+                            whiteSpace: this.state.infoWrap
+                        }}
+                        id="track-info">
                         <div id="title">
                             {this.state.currentTrack.title}
                         </div>

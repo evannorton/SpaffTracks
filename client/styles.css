@@ -178,19 +178,18 @@ header a:hover {
     position: absolute;
     left: 175px;
     height: 38px;
-    bottom: 35px;
-    line-height: .7;
-    font-size: 2em;
+    bottom: 30px;
+    line-height: 1;
 }
 
 #title {
     display: flex;
     align-items: flex-end;
     margin-right: 20px;
-    white-space: nowrap;
 }
 
 #date {
+    margin-bottom: 2px;
     font-size: 0.5em;
 }
 
