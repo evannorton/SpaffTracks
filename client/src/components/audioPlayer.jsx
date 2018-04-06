@@ -38,6 +38,9 @@ export default class AudioPlayer extends Component {
         this.audio.onpause = () => { this.setState({ icon: faPlayCircle }); };
         this.tracker = $("#tracker");
         this.audioLine = $("#audio-line");
+        $(window).resize(() => {
+            this.setInfoSize(this.state.currentTrack);
+        });
     }
 
     componentWillReceiveProps(props) {
@@ -220,12 +223,17 @@ export default class AudioPlayer extends Component {
 
     setInfoSize(track) {
         let length = track.title.length + track.venue.length + track.city.length + 8;
-        if (length > 50 && 160 / length <= 1.82) {
-            let infoSize = 160 / length;
+        if (track.title.length > 20) {
+            let infoSize = 150 / length;
             infoSize = "" + infoSize + "vw";
             this.setState({ infoSize, infoWrap: "unset" });
         } else {
-            this.setState({ infoSize: "2em", infoWrap: "nowrap" });
+            if ($(window).width() < 1200) {
+                console.log("here");
+                this.setState({ infoSize: "2.75vw", infoWrap: "unset" });
+            } else {
+                this.setState({ infoSize: "1.82vw", infoWrap: "nowrap" });
+            }
         }
     }
 
@@ -265,7 +273,6 @@ export default class AudioPlayer extends Component {
                             className="direction-button"
                             icon={faBackward}
                             onClick={() => {
-                                console.log(this.audio.currentTime);
                                 if (this.audio.currentTime < 2) {
                                     this.playPreviousTrack();
                                 } else {
