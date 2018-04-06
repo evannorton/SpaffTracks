@@ -162,8 +162,7 @@ export default class AudioPlayer extends Component {
             await this.setState({ currentTrack: newTrack });
             this.audio.play();
         } else {
-            this.setState({ currentTrack: tracks[Object.keys(tracks)[0]][0] });
-            this.setState({ icon: faPlayCircle });
+            this.audio.currentTime = this.audio.duration;
         }
     }
 
@@ -221,7 +220,6 @@ export default class AudioPlayer extends Component {
 
     setInfoSize(track) {
         let length = track.title.length + track.venue.length + track.city.length + 8;
-        console.log(175 / length);
         if (length > 50 && 160 / length <= 1.82) {
             let infoSize = 160 / length;
             infoSize = "" + infoSize + "vw";
@@ -266,7 +264,14 @@ export default class AudioPlayer extends Component {
                         <FontAwesomeIcon
                             className="direction-button"
                             icon={faBackward}
-                            onClick={() => { this.playPreviousTrack() }}
+                            onClick={() => {
+                                console.log(this.audio.currentTime);
+                                if (this.audio.currentTime < 2) {
+                                    this.playPreviousTrack();
+                                } else {
+                                    this.audio.currentTime = 0;
+                                }
+                            }}
                         />
                         <FontAwesomeIcon
                             className="play-button"
