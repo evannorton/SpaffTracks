@@ -1,10 +1,31 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import "babel-polyfill";
+
+import { get } from '../services/base';
+
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import faAngleDoubleLeft from "@fortawesome/fontawesome-free-solid/faAngleDoubleLeft";
+import faAngleDoubleRight from "@fortawesome/fontawesome-free-solid/faAngleDoubleRight";
 
 export default class Header extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            next: "",
+            previous: ""
+        }
+    }
+
+    async componentWillReceiveProps(props) {
+        if (props.page === "tracks" && props.date !== "Loading...") {
+            let next = await get("/shows/next/" + props.date.substring(0, 10));
+            let previous = await get("/shows/previous/" + props.date.substring(0, 10));
+            next = next.date;
+            previous = previous.date;
+            this.setState({ next, previous });
+        }
     }
 
     renderBackButton() {
@@ -31,9 +52,27 @@ export default class Header extends Component {
         } else if (this.props.page === "tracks") {
             return (
                 <div>
-                    <h1 id="header-date">{this.props.date}</h1>
+                    <h1 id="header-date">
+
+                        {this.props.date}
+
+                    </h1>
+                    <span id="previous-show">
+                        <Link className="show-navigation" to={`/show/${this.state.previous}`}>
+                            <FontAwesomeIcon
+                                icon={faAngleDoubleLeft}
+                            />
+                        </Link>
+                    </span>
                     <a target="_blank" href={this.props.spaffnerds}>Setlist: Spaffnerds.com</a>
-                </div>
+                    <span id="next-show">
+                        <Link className="show-navigation" to={`/show/${this.state.next}`}>
+                            <FontAwesomeIcon
+                                icon={faAngleDoubleRight}
+                            />
+                        </Link>
+                    </span>
+                </div >
             );
         } else {
             return (

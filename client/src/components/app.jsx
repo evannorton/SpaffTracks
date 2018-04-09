@@ -23,7 +23,7 @@ export default class App extends Component {
     }
 
     setPage(page) {
-        this.setState({ page, date: "Loading...", year: "Loading...", spaffnerds: "/", wasClicked: false });
+        this.setState({ page, date: "Loading...", year: "Loading...", spaffnerds: "/", wasClicked: false, navigated: false });
     }
 
     setYear(year) {
@@ -37,7 +37,7 @@ export default class App extends Component {
     }
 
     setTracks(tracks) {
-        this.setState({ tracks});
+        this.setState({ tracks, wasClicked: false });
     }
 
     setClickedTrack(clickedTrack) {
@@ -48,7 +48,12 @@ export default class App extends Component {
         return (
             <Router>
                 <Fragment>
-                    <Header page={this.state.page} year={this.state.year} date={this.state.date} spaffnerds={this.state.spaffnerds} />
+                    <Header
+                        page={this.state.page}
+                        year={this.state.year}
+                        date={this.state.date}
+                        spaffnerds={this.state.spaffnerds}
+                    />
                     <Switch>
                         <Route
                             exact path="/"

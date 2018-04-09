@@ -20,6 +20,15 @@ class Table {
         return executeQuery(`CALL getShowsByYear(${year})`);
     }
 
+    getNextShow(date) {
+        console.log(date);
+        return executeQuery(`CALL getNextShow("${date}")`);
+    }
+
+    getPreviousShow(date) {
+        return executeQuery(`CALL getPreviousShow("${date}")`);
+    }
+
     getTracks() {
         return executeQuery('SELECT * FROM tracks');
     }

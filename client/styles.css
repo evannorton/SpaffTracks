@@ -117,6 +117,26 @@ header {
     font-size: 2em;
 }
 
+#next-show {
+    top: 2px;
+    position: relative;
+    left: 20px;
+}
+
+#previous-show {
+    top: 2px;
+    position: relative;
+    right: 20px;
+}
+
+.show-navigation {
+    font-size: 1.5em;
+}
+
+.show-navigation:hover {
+    color: white;
+}
+
 header a {
     color: rgb(168, 168, 168);
     font-size: 1.5em;

@@ -34,6 +34,23 @@ export default class Tracks extends Component {
             });
     }
 
+    componentDidUpdate() {
+        let header = $("#header-date").text();
+        if (this.props.match.params.date !== header.substring(0, 10) && header.substring(0, 10) !== "Loading...") {
+            get('/tracks/show/' + this.props.match.params.date)
+            .then((tracks) => {
+                this.setState({ tracks });
+                this.props.setTracks(tracks);
+                for (let i = 0; i < Object.keys(tracks).length; i++) {
+                    if (tracks[Object.keys(tracks)[i]].length > 0) {
+                        this.props.setDate(tracks[Object.keys(tracks)[i]][0]);
+                        break;
+                    }
+                }
+            });
+        }
+    }
+
     renderSoundcheck() {
         if (this.state.tracks.soundcheck.length > 0) {
             return (
