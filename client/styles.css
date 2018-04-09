@@ -58,16 +58,27 @@ p {
 }
 
 .show {
+    text-align: left;
+    padding-left: 1em;
     font-size: 0.75em;
 }
 
 .track {
+    text-align: left;
+    padding-left: .5em;
+    padding-right: 3.5em;
     font-size: 0.75em;
     color: rgb(168, 168, 168);
 }
 
 .track:hover {
     color: rgb(168, 168, 168);
+}
+
+.duration {
+    display: inline-block;
+    right: .5em;
+    position: absolute;
 }
 
 .set-label {
