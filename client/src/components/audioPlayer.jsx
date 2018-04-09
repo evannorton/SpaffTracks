@@ -223,14 +223,13 @@ export default class AudioPlayer extends Component {
 
     setInfoSize(track) {
         let length = track.title.length + track.venue.length + track.city.length + 8;
-        if (track.title.length > 20) {
+        if (track.title.length > 40) {
             let infoSize = 150 / length;
             infoSize = "" + infoSize + "vw";
             this.setState({ infoSize, infoWrap: "unset" });
         } else {
             if ($(window).width() < 1200) {
-                console.log("here");
-                this.setState({ infoSize: "2.75vw", infoWrap: "unset" });
+                this.setState({ infoSize: "2.4vw", infoWrap: "unset" });
             } else {
                 this.setState({ infoSize: "1.82vw", infoWrap: "nowrap" });
             }
