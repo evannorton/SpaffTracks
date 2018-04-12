@@ -22,8 +22,18 @@ export default class Header extends Component {
         if (props.page === "tracks" && props.date !== "Loading...") {
             let next = await get("/shows/next/" + props.date.substring(0, 10));
             let previous = await get("/shows/previous/" + props.date.substring(0, 10));
-            next = next.date;
-            previous = previous.date;
+            if (next) {
+                $("#next-show").css({ visibility: "unset" });
+                next = next.date;
+            } else {
+                $("#next-show").css({ visibility: "hidden" });
+            }
+            if (previous) {
+                $("#previous-show").css({ visibility: "unset" });
+                previous = previous.date;
+            } else {
+                $("#previous-show").css({ visibility: "hidden" });
+            }
             this.setState({ next, previous });
         }
     }

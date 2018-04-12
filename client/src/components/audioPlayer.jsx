@@ -104,6 +104,17 @@ export default class AudioPlayer extends Component {
                     newTrack = track;
                 }
             });
+            if (!newTrack) {
+                set = "S";
+                position = tracks.soundcheck.length + 1;
+            }
+        }
+        if (set === "S") {
+            tracks.soundcheck.forEach((track) => {
+                if (track.position === position - 1) {
+                    newTrack = track;
+                }
+            });
         }
         if (newTrack) {
             this.setInfoSize(newTrack);
@@ -120,6 +131,17 @@ export default class AudioPlayer extends Component {
         let set = currentTrack.set;
         let position = currentTrack.position;
         let newTrack;
+        if (set === "S") {
+            tracks.soundcheck.forEach((track) => {
+                if (track.position === position + 1) {
+                    newTrack = track;
+                }
+            });
+            if (!newTrack) {
+                set = "1";
+                position = 0;
+            }
+        }
         if (set === "1") {
             tracks.set1.forEach((track) => {
                 if (track.position === position + 1) {

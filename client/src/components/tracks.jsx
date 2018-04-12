@@ -20,12 +20,14 @@ export default class Tracks extends Component {
     }
 
     componentDidMount() {
+
         this.props.setPage("tracks");
         get('/tracks/show/' + this.props.match.params.date)
             .then((tracks) => {
                 this.setState({ tracks });
                 this.props.setTracks(tracks);
                 for (let i = 0; i < Object.keys(tracks).length; i++) {
+                    console.log(tracks[Object.keys(tracks)[i]].length);
                     if (tracks[Object.keys(tracks)[i]].length > 0) {
                         this.props.setDate(tracks[Object.keys(tracks)[i]][0]);
                         break;
@@ -38,16 +40,16 @@ export default class Tracks extends Component {
         let header = $("#header-date").text();
         if (this.props.match.params.date !== header.substring(0, 10) && header.substring(0, 10) !== "Loading...") {
             get('/tracks/show/' + this.props.match.params.date)
-            .then((tracks) => {
-                this.setState({ tracks });
-                this.props.setTracks(tracks);
-                for (let i = 0; i < Object.keys(tracks).length; i++) {
-                    if (tracks[Object.keys(tracks)[i]].length > 0) {
-                        this.props.setDate(tracks[Object.keys(tracks)[i]][0]);
-                        break;
+                .then((tracks) => {
+                    this.setState({ tracks });
+                    this.props.setTracks(tracks);
+                    for (let i = 0; i < Object.keys(tracks).length; i++) {
+                        if (tracks[Object.keys(tracks)[i]].length > 0) {
+                            this.props.setDate(tracks[Object.keys(tracks)[i]][0]);
+                            break;
+                        }
                     }
-                }
-            });
+                });
         }
     }
 
