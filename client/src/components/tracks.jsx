@@ -40,15 +40,16 @@ export default class Tracks extends Component {
         let newDate = window.location.pathname.substring(6);
         let track;
         if (date && date != newDate) {
+            console.log("ASDASDASD");
             get('/tracks/show/' + this.props.match.params.date)
                 .then((tracks) => {
                     for (let i = 0; i < Object.keys(tracks).length; i++) {
                         if (tracks[Object.keys(tracks)[i]].length > 0) {
                             track = tracks[Object.keys(tracks)[i]][0]
-                            date = tracks[Object.keys(tracks)[i]][0].date
                             break;
                         }
                     }
+                    date = newDate;
                     this.setState({ tracks, date });
                     this.props.setDate(track);
                     this.props.setTracks(tracks);

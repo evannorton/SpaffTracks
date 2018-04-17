@@ -31,9 +31,11 @@ export default class App extends Component {
     }
 
     setDate(date) {
-        let spaffnerds = date.spaffnerds;
-        date = date.date + " - " + date.venue + ", " + date.city;
-        this.setState({ date, spaffnerds });
+        if (date) {
+            let spaffnerds = date.spaffnerds;
+            date = date.date + " - " + date.venue + ", " + date.city;
+            this.setState({ date, spaffnerds });
+        }
     }
 
     setTracks(tracks) {
