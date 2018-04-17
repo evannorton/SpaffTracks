@@ -34,7 +34,7 @@ export default class App extends Component {
         if (date) {
             let spaffnerds = date.spaffnerds;
             date = date.date + " - " + date.venue + ", " + date.city;
-            this.setState({ date, spaffnerds });
+            this.setState({ date, spaffnerds, wasClicked: false });
         }
     }
 
