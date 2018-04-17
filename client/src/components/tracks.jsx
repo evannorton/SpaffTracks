@@ -20,20 +20,6 @@ export default class Tracks extends Component {
     }
 
     componentDidMount() {
-        $(window).on('hashchange', () => {
-            this.props.setPage("tracks");
-            get('/tracks/show/' + this.props.match.params.date)
-                .then((tracks) => {
-                    this.setState({ tracks });
-                    this.props.setTracks(tracks);
-                    for (let i = 0; i < Object.keys(tracks).length; i++) {
-                        if (tracks[Object.keys(tracks)[i]].length > 0) {
-                            this.props.setDate(tracks[Object.keys(tracks)[i]][0]);
-                            break;
-                        }
-                    }
-                });
-        });
         this.props.setPage("tracks");
         get('/tracks/show/' + this.props.match.params.date)
             .then((tracks) => {
@@ -42,10 +28,32 @@ export default class Tracks extends Component {
                 for (let i = 0; i < Object.keys(tracks).length; i++) {
                     if (tracks[Object.keys(tracks)[i]].length > 0) {
                         this.props.setDate(tracks[Object.keys(tracks)[i]][0]);
+                        this.setState({ date: tracks[Object.keys(tracks)[i]][0].date });
                         break;
                     }
                 }
             });
+    }
+
+    componentDidUpdate() {
+        let date = this.state.date;
+        let newDate = window.location.pathname.substring(6);
+        let track;
+        if (date && date != newDate) {
+            get('/tracks/show/' + this.props.match.params.date)
+                .then((tracks) => {
+                    for (let i = 0; i < Object.keys(tracks).length; i++) {
+                        if (tracks[Object.keys(tracks)[i]].length > 0) {
+                            track = tracks[Object.keys(tracks)[i]][0]
+                            date = tracks[Object.keys(tracks)[i]][0].date
+                            break;
+                        }
+                    }
+                    this.setState({ tracks, date });
+                    this.props.setDate(track);
+                    this.props.setTracks(tracks);
+                });
+        }
     }
 
     renderSoundcheck() {

@@ -70,7 +70,6 @@ export default class Header extends Component {
                     <span id="previous-show">
                         <Link className="show-navigation" to={`/show/${this.state.previous}`}>
                             <FontAwesomeIcon
-                                onClick={() => { location.hash = "1"; }}
                                 icon={faAngleDoubleLeft}
                             />
                         </Link>
@@ -79,7 +78,6 @@ export default class Header extends Component {
                     <span id="next-show">
                         <Link className="show-navigation" to={`/show/${this.state.next}`}>
                             <FontAwesomeIcon
-                                onClick={() => { location.hash = "1"; }}
                                 icon={faAngleDoubleRight}
                             />
                         </Link>

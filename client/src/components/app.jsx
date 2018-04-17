@@ -15,7 +15,6 @@ export default class App extends Component {
             tracks: [],
             clickedTrack: {},
             wasClicked: false,
-            navigated: false,
             page: "",
             year: "Loading...",
             date: "Loading...",
@@ -24,7 +23,7 @@ export default class App extends Component {
     }
 
     setPage(page) {
-        this.setState({ page, date: "Loading...", year: "Loading...", spaffnerds: "/", wasClicked: false, navigated: false });
+        this.setState({ page, date: "Loading...", year: "Loading...", spaffnerds: "/", wasClicked: false });
     }
 
     setYear(year) {
@@ -38,11 +37,11 @@ export default class App extends Component {
     }
 
     setTracks(tracks) {
-        this.setState({ tracks, wasClicked: false, navigated: false });
+        this.setState({ tracks, wasClicked: false });
     }
 
     setClickedTrack(clickedTrack) {
-        this.setState({ clickedTrack, wasClicked: true, navigated: false });
+        this.setState({ clickedTrack, wasClicked: true });
     }
 
     render() {
