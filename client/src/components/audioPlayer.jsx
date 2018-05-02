@@ -13,6 +13,7 @@ export default class AudioPlayer extends Component {
         super(props);
         this.state = {
             tracks: [],
+            currentTracks: [],
             currentTrack: {
                 url: "",
                 title: "",
@@ -46,6 +47,7 @@ export default class AudioPlayer extends Component {
     componentWillReceiveProps(props) {
         this.setState({ tracks: props.tracks });
         if (props.wasClicked) {
+            this.setState({ currentTracks: props.tracks });
             this.setInfoSize(props.clickedTrack);
             $("#audio-player").css("visibility", "visible");
             $("#pre-audio").css("visibility", "hidden");
@@ -60,7 +62,7 @@ export default class AudioPlayer extends Component {
     }
 
     async playPreviousTrack() {
-        let tracks = this.state.tracks;
+        let tracks = this.state.currentTracks;
         let currentTrack = this.state.currentTrack;
         let set = currentTrack.set;
         let position = currentTrack.position;
@@ -126,7 +128,7 @@ export default class AudioPlayer extends Component {
     }
 
     async playNextTrack() {
-        let tracks = this.state.tracks;
+        let tracks = this.state.currentTracks;
         let currentTrack = this.state.currentTrack;
         let set = currentTrack.set;
         let position = currentTrack.position;
