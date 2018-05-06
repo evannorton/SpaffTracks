@@ -28,7 +28,6 @@ function populateAuthToken() {
 }
 
 function makeFetch(url, info) {
-    console.log(url);
     return fetch(baseurl + url, info);
 }
 
