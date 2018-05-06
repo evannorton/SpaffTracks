@@ -97,6 +97,7 @@ export default class Header extends Component {
         return (
             <header className="container-fluid d-flex align-items-center justify-content-center">
                 {this.renderBackButton()}
+                <a id="donate" href="https://www.paypal.me/spafftracks">Donate!</a>
                 {this.renderHeaderInfo()}
             </header >
         );

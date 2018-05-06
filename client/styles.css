@@ -107,9 +107,17 @@ header {
     left: 15px;
 }
 
-.back-button:hover {
+.back-button:hover, #donate:hover {
     color: white;
     text-decoration: none;
+}
+
+#donate {
+    font-size: 1.8em;
+    color: white;
+    position: absolute;
+    top: 15px;
+    right: 15px;
 }
 
 #header-date {
@@ -258,7 +266,7 @@ header a:hover {
     header {
         font-size: .75em;
     }
-    .back-button {
+    .back-button, #donate {
         top: 22px;
     }
 }
