@@ -14,22 +14,22 @@ function configurePassport(app) {
         session: false,
     }, (email, password, done) => {
         usersTable.find({ email })
-        .then((results) => results[0])
-        .then((user) => {
-            if (user && user.password && user.password === password) {
-                tokensTable.insert({
-                    userid: user.id
-                })
-                .then((idObj) => encode(idObj.id))
-                .then((token) => {
-                    return done(null, { token });
-                });
-            } else {
-                return done(null, false, { message: 'Invalid credentials' });
-            }
-        }).catch((err) => {
-            return done(err);
-        });
+            .then((results) => results[0])
+            .then((user) => {
+                if (user && user.password && user.password === password) {
+                    tokensTable.insert({
+                        userid: user.id
+                    })
+                        .then((idObj) => encode(idObj.id))
+                        .then((token) => {
+                            return done(null, { token });
+                        });
+                } else {
+                    return done(null, false, { message: 'Invalid credentials' });
+                }
+            }).catch((err) => {
+                return done(err);
+            });
     }));
 
     passport.use(new BearerStrategy((token, done) => {
@@ -38,18 +38,18 @@ function configurePassport(app) {
             return done(null, false, { message: 'Invalid token' });
         }
         tokensTable.getOne(tokenId)
-        .then((tokenRecord) => {
-            return usersTable.getOne(tokenRecord.userid);
-        }).then((user) => {
-            if (user) {
-                delete user.password;
-                return done(null, user);
-            } else {
-                return done(null, false, { message: 'Invalid token' });
-            }
-        }).catch((err) => {
-            return done(err);
-        });
+            .then((tokenRecord) => {
+                return usersTable.getOne(tokenRecord.userid);
+            }).then((user) => {
+                if (user) {
+                    delete user.password;
+                    return done(null, user);
+                } else {
+                    return done(null, false, { message: 'Invalid token' });
+                }
+            }).catch((err) => {
+                return done(err);
+            });
     }))
 
     app.use(passport.initialize());
