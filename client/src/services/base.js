@@ -1,6 +1,6 @@
 import 'isomorphic-fetch';
 
-const baseurl = 'https://www.spafftracks.com/api';
+const baseurl = 'https://spafftracks.com/api';
 const AUTH_TOKEN_KEY = 'authtoken';
 let authToken = '';
 
