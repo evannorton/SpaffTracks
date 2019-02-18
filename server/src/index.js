@@ -15,9 +15,27 @@ app.use(express.json());
 
 configurePassport(app);
 
-app.use('/api', routes);
+app.use((req, res, next) => {
+    let isCorrect = true;
+    let url = req.protocol + '://' + req.get('host') + req.originalUrl;
+    console.log(url);
+    if (url.indexOf("http://") >= 0) {
+        isCorrect = false;
+        url = url.replace("http", "https");
+    }
+    if (url.indexOf("www.") >= 0) {
+        isCorrect = false;
+        url = url.replace("www.", "");
+    }
+    if (isCorrect) {
+        next();
+    } else {
+        console.log(url);
+        res.redirect(302, url);
+    }
+});
 
-app.use(stateRouting);
+app.use('/api', routes);
 
 let port = process.env.PORT || 3000;
 app.listen(port, () => {
