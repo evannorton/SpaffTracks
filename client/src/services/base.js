@@ -1,6 +1,6 @@
 import 'isomorphic-fetch';
 
-const baseurl = 'http://localhost:3000/api';
+const baseurl = window.location.protocol + "//" + window.location.hostname + "/api";
 const AUTH_TOKEN_KEY = 'authtoken';
 let authToken = '';
 

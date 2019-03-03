@@ -21,7 +21,6 @@ class Table {
     }
 
     getNextShow(date) {
-        console.log(date);
         return executeQuery(`CALL getNextShow("${date}")`);
     }
 
