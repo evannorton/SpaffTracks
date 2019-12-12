@@ -11,6 +11,14 @@ app.use(express.json());
 
 app.use('/api', routes);
 
+app.get('/*', function (req, res) {
+    res.sendFile(join(__dirname, "../../client/index.html"), function (err) {
+        if (err) {
+            res.status(500).send(err)
+        }
+    })
+})
+
 let port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
