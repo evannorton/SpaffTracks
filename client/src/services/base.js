@@ -1,6 +1,6 @@
 import 'isomorphic-fetch';
 
-const baseurl = window.location.protocol + "//" + window.location.hostname + "/api";
+const baseurl = location.origin + "/api";
 const AUTH_TOKEN_KEY = 'authtoken';
 let authToken = '';
 
