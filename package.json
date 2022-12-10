@@ -27,7 +27,7 @@
         "babel-preset-es2015": "^6.24.1",
         "babel-preset-react": "^6.24.1",
         "babel-preset-stage-0": "^6.24.1",
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "isomorphic-fetch": "^2.2.1",
         "mysql": "^2.17.1",
         "react": "^16.12.0",
